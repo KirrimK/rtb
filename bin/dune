@@ -1,4 +1,4 @@
 (executable
  (public_name rtb)
  (name main)
- (libraries rtb))
+ (libraries rtb dune-build-info))

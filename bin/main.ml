@@ -1,4 +1,7 @@
-let () = print_endline "Hello, World!"
+print_endline "Hello, World!";;
+print_endline ("Rémy's Tiny Basic interpreter (rtb) version " ^(match Build_info.V1.version () with
+   | None -> "N/A"
+   | Some v -> Build_info.V1.Version.to_string v));
 
 open Interpreter;;
 

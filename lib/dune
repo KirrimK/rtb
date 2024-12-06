@@ -1,7 +1,6 @@
 (library
  (name rtb)
- (wrapped false)
- (libraries dune-build-info))
+ (wrapped false))
 
 (menhir (modules parser))
 (ocamllex lexer)
