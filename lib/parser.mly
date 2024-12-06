@@ -49,6 +49,7 @@
 
 line_list:
   l = line NEWLINE ll = line_list {l::ll}
+| NEWLINE ll = line_list {ll}
 | l = line EOF {[l]}
 | EOF {[]}
 
