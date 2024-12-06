@@ -7,20 +7,20 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github KirrimK/rtb))
 
-(authors "Author Name")
+(authors "Rémy B.")
 
-(maintainers "Maintainer Name")
+(maintainers "Rémy B.")
 
-(license LICENSE)
+(license MIT)
 
 (documentation https://url/to/documentation)
 
 (package
  (name rtb)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "Rémy's Tiny Basic interpreter")
+ (description "An interpreter for Tiny Basic made in OCaml")
  (depends
     ocaml
     dune
@@ -28,6 +28,6 @@
     dune-build-info
   )
  (tags
-  (topics "to describe" your project)))
+  (tiny-basic interpreter)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
