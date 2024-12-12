@@ -7,6 +7,10 @@ type memory = (string * value) list * int list
 exception Not_implemented;;
 exception Halted;;
 
+let split_on_first_space =
+  let re = Str.regexp "[ \t\r\n]" in
+  function s -> Str.bounded_split re s 2
+
 let line_list_to_code (line_list: line list): code =
   let line_array = Array.of_list line_list in
   let line_assoc_pre = Array.mapi (fun i e -> 
@@ -44,7 +48,19 @@ and run_statement (memory: memory) (line_assoc: (int * int) list) (ip: int) (sta
     | Goto e -> begin match calc_expr memory e with
                   Number n -> (memory, List.assoc n line_assoc)
                 | String _ -> failwith "Cannot jump to non-int line number" end
-    | Input _ -> raise Not_implemented
+    | Input var_list -> 
+                begin let user_input = read_line () in
+                let rec local = fun (vlist: string list) (out: (string * value) list) (input_buffer: string): (string * value) list ->
+                  match vlist with
+                    [a] -> (a, String input_buffer)::out
+                  | hd_vlist::tl_vlist -> begin match split_on_first_space input_buffer with
+                                [a] -> (hd_vlist,(String a))::out
+                              | [hd_buffer;tl_buffer] -> local tl_vlist ((hd_vlist, (String hd_buffer))::out) tl_buffer
+                              | _ -> out end 
+                  | _ -> [] in
+                let new_vars = local var_list [] user_input in
+                ((new_vars @ var_assoc, ret_stack), ip+1)
+                end
     | Let (s, e) -> let v = calc_expr memory e in (((s, v)::var_assoc, ret_stack), ip+1)
     | Gosub e -> begin match calc_expr memory e with
                   Number n -> ((var_assoc, (ip+1)::ret_stack), List.assoc n line_assoc)

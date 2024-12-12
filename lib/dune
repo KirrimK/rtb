@@ -1,6 +1,7 @@
 (library
  (name rtb)
- (wrapped false))
+ (wrapped false)
+ (libraries str))
 
 (menhir (modules parser))
 (ocamllex lexer)
