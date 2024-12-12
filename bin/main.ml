@@ -40,13 +40,13 @@ else
     | Failure s -> print_endline s
 
   else
+    
+    print_version ();
 
     let input = ref "" in
     let done_ = ref true in
 
     while !done_ do
-
-      print_version ();
 
       print_string "> ";
       let temp_input = 
