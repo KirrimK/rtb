@@ -17,7 +17,7 @@ let print_version () =
   | Some v -> Build_info.V1.Version.to_string v));
   print_endline "Rémy's Tiny Basic interpreter";
   print_endline "Copyright (C) 2024 Rémy B.";
-  print_endline "License MIT <>";;
+  print_endline "License MIT <https://github.com/KirrimK/rtb/blob/main/LICENSE>";;
 
 if !version_print then
   print_version ()
